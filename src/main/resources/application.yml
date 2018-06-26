@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+spring:
+  application:
+    name: 京东联盟推广
+  profiles:
+    active: product
+  jmx:
+    default-domain: jdmedia
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+      schema: classpath:tables_mysql_innodb.sql
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: MyScheduler
+            instanceId: AUTO
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+          jobStore:
+            class : org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass : org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            useProperties : false
+            isClustered : false
+---
+spring:
+  profiles: dev
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.98.196.148:3306/jdmedia?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: shuo
+    password: cs6834466
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
