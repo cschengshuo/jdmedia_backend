@@ -20,6 +20,10 @@ public class JdmediaApplication extends SpringBootServletInitializer {
     SpringApplication.run(JdmediaApplication.class, args);
   }
 
+  /**
+   * 设置MessageSource使SpringSecurity返回中文消息
+   * @return
+   */
   @Bean
   public MessageSource messageSource() {
     ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
